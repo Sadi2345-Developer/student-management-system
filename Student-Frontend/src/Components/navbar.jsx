@@ -5,19 +5,23 @@ const AppNavbar = () => {
   // use to set the location /path
   const { pathname } = useLocation();
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
       <Container>
-        <Navbar.Brand as={Link} to="/"> Student Management System </Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+          🎓 Student Manager
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link as={Link} to="/" active={pathname == '/'} >All Students</Nav.Link>
+            <Nav.Link as={Link} to="/" active={pathname === '/'}>All Students</Nav.Link>
           </Nav>
-          <Button variant='primary' as={Link} to="/add" >Add Student</Button>
+          <Button variant="primary" as={Link} to="/add" size="sm">
+            + Add Student
+          </Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
 };
+
 export default AppNavbar;
