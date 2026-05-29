@@ -1,22 +1,33 @@
+/* ===== CSS Variables & Global Styles ===== */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --text: #4a4458;
+  --text-h: #1a1625;
+  --bg: #f8f7fc;
+  --border: #e2dff0;
+  --code-bg: #f0eef8;
+  --accent: #7c3aed;
+  --accent-light: #a78bfa;
+  --accent-bg: rgba(124, 58, 237, 0.08);
+  --accent-border: rgba(124, 58, 237, 0.4);
+  --social-bg: rgba(240, 238, 248, 0.5);
+  --card-bg: #ffffff;
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --card-shadow-hover: 0 4px 16px rgba(124, 58, 237, 0.12), 0 8px 24px rgba(0, 0, 0, 0.06);
+  --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --gradient-primary: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+  --gradient-danger: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+  --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Outfit', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
+  font: 16px/1.6 var(--sans);
+  letter-spacing: -0.01em;
   color-scheme: light dark;
   color: var(--text);
   background: var(--bg);
@@ -24,25 +35,24 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+    --text: #b4b0c4;
+    --text-h: #f0eef8;
+    --bg: #0f0d15;
+    --border: #2a2639;
+    --code-bg: #1a1825;
+    --accent: #a78bfa;
+    --accent-light: #c4b5fd;
+    --accent-bg: rgba(167, 139, 250, 0.12);
+    --accent-border: rgba(167, 139, 250, 0.4);
+    --social-bg: rgba(42, 38, 57, 0.5);
+    --card-bg: #1a1825;
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
+    --card-shadow-hover: 0 4px 16px rgba(167, 139, 250, 0.15), 0 8px 24px rgba(0, 0, 0, 0.2);
+    --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
   }
 
   #social .button-icon {
@@ -50,8 +60,16 @@
   }
 }
 
+/* ===== Reset & Base ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  overflow-x: hidden;
 }
 
 #root {
@@ -59,49 +77,441 @@ body {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
 }
 
-h1,
-h2 {
+/* ===== Typography ===== */
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--heading);
-  font-weight: 500;
+  font-weight: 700;
   color: var(--text-h);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
+  font-size: 2.5rem;
+  margin: 24px 0;
 }
 
+h2 {
+  font-size: 1.5rem;
+  margin: 0 0 8px;
+}
+
+p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ===== Responsive Typography ===== */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.75rem;
+    margin: 16px 0;
+  }
+  h2 {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    font-size: 14px;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* ===== Code Blocks ===== */
 code,
 .counter {
   font-family: var(--mono);
   display: inline-flex;
-  border-radius: 4px;
+  border-radius: 6px;
   color: var(--text-h);
 }
 
 code {
-  font-size: 15px;
+  font-size: 14px;
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
+}
+
+/* ===== Enhanced Navbar ===== */
+.navbar {
+  font-family: var(--sans) !important;
+  letter-spacing: -0.01em;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.navbar-brand {
+  font-family: var(--heading) !important;
+  font-weight: 700 !important;
+  font-size: 1.25rem !important;
+  letter-spacing: -0.02em !important;
+}
+
+.nav-link {
+  font-weight: 500 !important;
+  font-size: 0.95rem !important;
+  transition: color 0.2s ease !important;
+}
+
+/* ===== Student Cards Grid ===== */
+.student-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 0;
+}
+
+@media (max-width: 1200px) {
+  .student-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .student-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .student-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .student-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* ===== Student Card Styling ===== */
+.student-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  width: 100% !important;
+}
+
+.student-card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-4px);
+  border-color: var(--accent-border);
+}
+
+.student-card .card-body {
+  padding: 20px;
+  font-family: var(--sans);
+}
+
+.student-card .card-title {
+  font-family: var(--heading) !important;
+  font-weight: 700 !important;
+  font-size: 1.35rem !important;
+  color: var(--text-h) !important;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px !important;
+}
+
+.student-card .card-subtitle {
+  font-size: 0.85rem !important;
+  color: var(--accent) !important;
+  font-weight: 500 !important;
+  opacity: 0.9;
+}
+
+.student-card .card-text {
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-top: 12px;
+}
+
+.student-card .card-text strong {
+  color: var(--text-h);
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.student-card .card-text > div {
+  padding: 4px 0;
+}
+
+.student-card .card-footer {
+  background: var(--accent-bg) !important;
+  border-top: 1px solid var(--border) !important;
+  padding: 14px 20px !important;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg) !important;
+}
+
+/* ===== Card Buttons ===== */
+.student-card .btn-warning {
+  background: var(--gradient-warning) !important;
+  border: none !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  font-size: 0.8rem !important;
+  padding: 6px 14px !important;
+  border-radius: var(--radius-sm) !important;
+  transition: all 0.2s ease !important;
+  font-family: var(--sans) !important;
+  letter-spacing: 0;
+}
+
+.student-card .btn-danger {
+  background: var(--gradient-danger) !important;
+  border: none !important;
+  font-weight: 600 !important;
+  font-size: 0.8rem !important;
+  padding: 6px 14px !important;
+  border-radius: var(--radius-sm) !important;
+  transition: all 0.2s ease !important;
+  font-family: var(--sans) !important;
+  letter-spacing: 0;
+}
+
+.student-card .btn-warning:hover,
+.student-card .btn-danger:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Marks Badge ===== */
+.student-card .badge {
+  font-family: var(--sans) !important;
+  font-weight: 600 !important;
+  font-size: 0.8rem !important;
+  padding: 5px 12px !important;
+  border-radius: 20px !important;
+  background: var(--gradient-primary) !important;
+}
+
+/* ===== Page Title Section ===== */
+.page-title-section {
+  text-align: center;
+  padding: 32px 16px 8px;
+}
+
+.page-title-section h1 {
+  font-family: var(--heading);
+  font-weight: 800;
+  font-size: 2.25rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 4px;
+}
+
+.page-title-section .subtitle {
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .page-title-section {
+    padding: 20px 12px 4px;
+  }
+  .page-title-section h1 {
+    font-size: 1.65rem;
+  }
+  .page-title-section .subtitle {
+    font-size: 0.85rem;
+  }
+}
+
+/* ===== Form Styling ===== */
+.form-control,
+.form-select {
+  font-family: var(--sans) !important;
+  border-radius: var(--radius-sm) !important;
+  border: 1.5px solid var(--border) !important;
+  padding: 10px 14px !important;
+  font-size: 0.95rem !important;
+  transition: all 0.2s ease !important;
+  background: var(--card-bg) !important;
+  color: var(--text-h) !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px var(--accent-bg) !important;
+}
+
+.form-label {
+  font-family: var(--sans) !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  color: var(--text-h) !important;
+  letter-spacing: -0.01em;
+}
+
+.form-text {
+  font-size: 0.8rem !important;
+  color: var(--text) !important;
+  opacity: 0.7;
+}
+
+/* ===== Button Enhancements ===== */
+.btn-primary {
+  background: var(--gradient-primary) !important;
+  border: none !important;
+  font-family: var(--sans) !important;
+  font-weight: 600 !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 10px 20px !important;
+  transition: all 0.2s ease !important;
+  letter-spacing: -0.01em;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3) !important;
+}
+
+.btn-secondary {
+  font-family: var(--sans) !important;
+  font-weight: 600 !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 10px 20px !important;
+  transition: all 0.2s ease !important;
+  letter-spacing: -0.01em;
+}
+
+/* ===== Alert Styling ===== */
+.alert {
+  font-family: var(--sans) !important;
+  border-radius: var(--radius-md) !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  border: none !important;
+}
+
+/* ===== Empty State ===== */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text);
+}
+
+.empty-state p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+/* ===== Responsive Containers ===== */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .student-card .card-body {
+    padding: 14px;
+  }
+
+  .student-card .card-title {
+    font-size: 1.1rem !important;
+  }
+
+  .student-card .card-subtitle {
+    font-size: 0.75rem !important;
+  }
+
+  .student-card .card-text {
+    font-size: 0.8rem;
+  }
+
+  .student-card .card-footer {
+    padding: 10px 14px !important;
+  }
+
+  .student-card .btn-warning,
+  .student-card .btn-danger {
+    font-size: 0.7rem !important;
+    padding: 4px 10px !important;
+  }
+
+  .student-card .badge {
+    font-size: 0.7rem !important;
+    padding: 4px 10px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .student-card .card-body {
+    padding: 12px;
+  }
+
+  .student-card .card-title {
+    font-size: 1rem !important;
+  }
+
+  .student-card .card-text > div {
+    padding: 2px 0;
+  }
+}
+
+/* ===== Smooth Animations ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.student-card {
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+.student-cards-grid > * {
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+.student-cards-grid > *:nth-child(1) { animation-delay: 0.05s; }
+.student-cards-grid > *:nth-child(2) { animation-delay: 0.1s; }
+.student-cards-grid > *:nth-child(3) { animation-delay: 0.15s; }
+.student-cards-grid > *:nth-child(4) { animation-delay: 0.2s; }
+.student-cards-grid > *:nth-child(5) { animation-delay: 0.25s; }
+.student-cards-grid > *:nth-child(6) { animation-delay: 0.3s; }
+.student-cards-grid > *:nth-child(7) { animation-delay: 0.35s; }
+.student-cards-grid > *:nth-child(8) { animation-delay: 0.4s; }
+.student-cards-grid > *:nth-child(9) { animation-delay: 0.45s; }
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-light);
 }
