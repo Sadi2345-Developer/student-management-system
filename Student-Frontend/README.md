@@ -7,12 +7,6 @@ A full-stack **Student Management System** built with the **MERN stack** (MongoD
 
 ---
 
-## 📸 Screenshots
-
-> Add Student Page — Edit Student Page — All Students View
-
----
-
 ## ✨ Features
 
 - 📋 **View All Students** — Displays all registered students in a responsive card grid
