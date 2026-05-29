@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { Button, Container, Form, Alert } from "react-bootstrap";
+import { Button, Container, Form, Row, Col, Alert } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { getStudentById, updateStudent } from "../Api/studentapi";
 
 const COURSES = ["Mern stack", "React", "AI", "Web", "Graphic"];
 
 const EditStudentPage = () => {
-  // read the
+  // read the id from URL
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -45,122 +45,128 @@ const EditStudentPage = () => {
 
   // fetch to capture every character of input fields
   const handleChange = (e) => {
-    const { name, value } = e.target; // Pata lagao kis box mein kya likha gaya hai
-    const updatedData = { ...formData, [name]: value }; // Purana data aur naya data merge karo
-    setFormData(updatedData); // State update karo
-    console.log("Current Form Data:", updatedData); // Console mein check karo (Debugging)
+    const { name, value } = e.target;
+    const updatedData = { ...formData, [name]: value };
+    setFormData(updatedData);
+    console.log("Current Form Data:", updatedData);
   };
 
   // function will run when we submit the form
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Page refresh honay se rokta hai (Very Important)
+    e.preventDefault();
     try {
-      // Backend API ko student ka data bhej raha hai
       await updateStudent(id, { ...formData });
-      setMessage({ variant: "success", text: "Student data updated Successfully!" }); // Kamyabi ka message
-      // redirecting the user into homepage
-      setTimeout(() => navigate("/"), 2000); // Wapas Home/List page par le jata hai
+      setMessage({ variant: "success", text: "Student data updated Successfully!" });
+      setTimeout(() => navigate("/"), 2000);
     } catch (error) {
-      setMessage({ variant: "danger", text: "Error updating student" }); // Agar koi masla ho jaye
+      setMessage({ variant: "danger", text: "Error updating student" });
     }
   };
 
   return (
     <div>
-      <Container>
+      <div className="page-title-section">
         <h1>Edit Student Record</h1>
-        {message && <Alert variant={message.variant}>{message.text}</Alert>}
-        {/* Form yahan se shuru hota hai */}
-        <Form onSubmit={handleSubmit}>
-          {/* Student Name wala field */}
-          <Form.Group className="mb-3">
-            <Form.Label>Student Name</Form.Label>
-            <Form.Control
-              value={formData.name}
-              type="text"
-              name="name"
-              placeholder="Enter Name"
-              onChange={handleChange}
-              required
-            />
-            <Form.Text className="text-muted">
-              Please enter your name.....
-            </Form.Text>
-          </Form.Group>
+        <p className="subtitle">Update the student information below</p>
+      </div>
 
-          {/* Email Address wala field */}
-          <Form.Group className="mb-3">
-            <Form.Label>Email Address</Form.Label>
-            <Form.Control
-              value={formData.email}
-              type="email"
-              name="email"
-              placeholder="Enter Email"
-              onChange={handleChange}
-              required
-            />
-            <Form.Text className="text-muted">
-              Please enter your valid email address.....
-            </Form.Text>
-          </Form.Group>
+      <Container className="mb-5">
+        <Row className="justify-content-center">
+          <Col xs={12} sm={10} md={8} lg={6}>
+            {message && <Alert variant={message.variant}>{message.text}</Alert>}
+            {/* Form starts here */}
+            <Form onSubmit={handleSubmit}>
+              {/* Student Name field */}
+              <Form.Group className="mb-3">
+                <Form.Label>Student Name</Form.Label>
+                <Form.Control
+                  value={formData.name}
+                  type="text"
+                  name="name"
+                  placeholder="Enter Name"
+                  onChange={handleChange}
+                  required
+                />
+                <Form.Text className="text-muted">
+                  Please enter your name
+                </Form.Text>
+              </Form.Group>
 
-          {/* Course select karne wala dropdown */}
-          <Form.Group className="mb-3">
-            <Form.Label>Course</Form.Label>
-            <Form.Select
-              name="course"
-              value={formData.course}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select a Course</option>
-              {/* COURSES array se loop chala kar options banana */}
-              {COURSES.map((c, index) => (
-                <option key={index} value={c}>
-                  {c}
-                </option>
-              ))}
-            </Form.Select>
-          </Form.Group>
+              {/* Email Address field */}
+              <Form.Group className="mb-3">
+                <Form.Label>Email Address</Form.Label>
+                <Form.Control
+                  value={formData.email}
+                  type="email"
+                  name="email"
+                  placeholder="Enter Email"
+                  onChange={handleChange}
+                  required
+                />
+                <Form.Text className="text-muted">
+                  Please enter your valid email address
+                </Form.Text>
+              </Form.Group>
 
-          {/* City wala field */}
-          <Form.Group className="mb-3">
-            <Form.Label>City</Form.Label>
-            <Form.Control
-              value={formData.city}
-              type="text"
-              name="city"
-              placeholder="Enter City"
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
+              {/* Course dropdown */}
+              <Form.Group className="mb-3">
+                <Form.Label>Course</Form.Label>
+                <Form.Select
+                  name="course"
+                  value={formData.course}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">Select a Course</option>
+                  {COURSES.map((c, index) => (
+                    <option key={index} value={c}>
+                      {c}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Form.Group>
 
-          {/* Marks wala field */}
-          <Form.Group className="mb-3">
-            <Form.Label>Marks</Form.Label>
-            <Form.Control
-              value={formData.marks}
-              type="number"
-              name="marks"
-              placeholder="Enter Marks"
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
+              {/* City field */}
+              <Form.Group className="mb-3">
+                <Form.Label>City</Form.Label>
+                <Form.Control
+                  value={formData.city}
+                  type="text"
+                  name="city"
+                  placeholder="Enter City"
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
 
-          {/* Save aur Cancel ke buttons */}
-          <div className="d-grid gap-2">
-            <Button variant="primary" type="submit">
-              Save Student
-            </Button>
-            <Button variant="secondary" onClick={() => navigate("/")}>
-              Cancel
-            </Button>
-          </div>
-        </Form>
+              {/* Marks field */}
+              <Form.Group className="mb-3">
+                <Form.Label>Marks</Form.Label>
+                <Form.Control
+                  value={formData.marks}
+                  type="number"
+                  name="marks"
+                  placeholder="Enter Marks"
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+
+              {/* Save and Cancel buttons */}
+              <div className="d-grid gap-2">
+                <Button variant="primary" type="submit">
+                  Update Student
+                </Button>
+                <Button variant="secondary" onClick={() => navigate("/")}>
+                  Cancel
+                </Button>
+              </div>
+            </Form>
+          </Col>
+        </Row>
       </Container>
     </div>
   );
 };
+
 export default EditStudentPage;
