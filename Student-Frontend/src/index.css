@@ -349,18 +349,48 @@ code {
 .form-select {
   font-family: var(--sans) !important;
   border-radius: var(--radius-sm) !important;
-  border: 1.5px solid var(--border) !important;
+  border: 1.5px solid #d1cfe8 !important;
   padding: 10px 14px !important;
   font-size: 0.95rem !important;
   transition: all 0.2s ease !important;
-  background: var(--card-bg) !important;
-  color: var(--text-h) !important;
+  background: #ffffff !important;
+  color: #1a1625 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+.form-control::placeholder {
+  color: #9ca3af !important;
+  opacity: 1 !important;
 }
 
 .form-control:focus,
 .form-select:focus {
-  border-color: var(--accent) !important;
-  box-shadow: 0 0 0 3px var(--accent-bg) !important;
+  border-color: #7c3aed !important;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12) !important;
+  background: #ffffff !important;
+  color: #1a1625 !important;
+  outline: none !important;
+}
+
+/* Dark mode: keep inputs light so text stays readable */
+@media (prefers-color-scheme: dark) {
+  .form-control,
+  .form-select {
+    background: #f5f3ff !important;
+    color: #1a1625 !important;
+    border-color: rgba(124, 58, 237, 0.35) !important;
+  }
+
+  .form-control::placeholder {
+    color: #6b7280 !important;
+  }
+
+  .form-control:focus,
+  .form-select:focus {
+    background: #ffffff !important;
+    color: #1a1625 !important;
+    border-color: #7c3aed !important;
+  }
 }
 
 .form-label {
